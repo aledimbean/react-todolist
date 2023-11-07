@@ -29,7 +29,7 @@ function TodoList() {
           <h1><List size={18} color="white" className="inline mr-2"/>Agenda</h1>
           <span className="text-xs">Completed items: {todoList.filter((todo) => todo.completed).length}</span>
         </div>
-        <div className="flex w-full tablet:w-1/2 justify-between tablet:justify-start gap-2 pt-6 pb-10 px-4">
+        <div className="flex w-full md:w-1/2 justify-between md:justify-start gap-2 pt-6 pb-10 px-4">
           <input 
             className="w-3/4 px-4 py-2 outline-none text-gray-900 border border-gray-300 rounded-[5rem] bg-gray-50 text-md focus:ring-mainColor focus:border-mainColor" 
             type="text" 
