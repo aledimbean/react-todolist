@@ -1,25 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Navbar from './components/Navbar';
+import RandomQuote from './components/RandomQuote';
+import TodoList from './components/TodoList';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Theme } from './Theme';
+import { ThemeProvider } from "styled-components";
+import styled from "styled-components";
+import img from "./assets/dotted-background.jpg"
 
-function App() {
+const Container = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  padding: 10rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  &:before {
+    position: absolute;
+    z-index: -1;
+    content: '';
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: repeat url(${img});
+    background-size: 1rem;
+    opacity: 0.4;
+  }
+`;
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <ThemeProvider theme={Theme}>
+          <Navbar />
+        <Container>
+          <Routes>
+            <Route path="/" element={<TodoList />} />
+            <Route path="/random-quote" element={<RandomQuote />} />
+          </Routes>
+        </Container>
+      </ThemeProvider>
+	  </BrowserRouter>
   );
 }
 
