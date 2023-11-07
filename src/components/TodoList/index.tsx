@@ -29,9 +29,9 @@ function TodoList() {
           <h1><List size={18} color="white" className="inline mr-2"/>Agenda</h1>
           <span className="text-xs">Completed items: {todoList.filter((todo) => todo.completed).length}</span>
         </div>
-        <div className="flex w-full md:w-1/2 justify-between md:justify-start gap-2 pt-6 pb-10 px-4">
+        <div className="flex w-full md:w-1/2 justify-between md:justify-start gap-1 md:gap-2 pt-6 pb-10 px-4">
           <input 
-            className="w-3/4 px-4 py-2 outline-none text-gray-900 border border-gray-300 rounded-[5rem] bg-gray-50 text-md focus:ring-mainColor focus:border-mainColor" 
+            className="flex basis-3/4 md:basis-1/2 px-4 py-2 outline-none text-gray-900 border border-gray-300 rounded-[5rem] bg-gray-50 text-md focus:ring-mainColor focus:border-mainColor" 
             type="text" 
             onChange={(e:any) => setTodoTitle(e.target.value)} 
             value={todoTitle} />
@@ -41,13 +41,13 @@ function TodoList() {
             if (todoTitle !== '') {
               dispatch(addTodo(todoTitle))
               setTodoTitle('')
-          }}}>Add todo</button>
+          }}}>Add task</button>
           </div>
           {todoList.length > 0 && 
           <ul className="p-4">
             {
               todoList.map((todo) => (
-                <div key={todo.id} className="flex items-center py-2 justify-between text-mainColor border-b-2 last:border-b-0">
+                <div key={todo.id} className="flex items-center py-2 justify-between text-mainColor border-b-2 last:border-b-0 text-xs">
                   <div className={`flex gap-2 items-center ${todo?.completed && !(isOpen as any)[todo.id] ? 'line-through' : ''}`}>
                     {/* Toggle edit mode */}
                     {(isOpen as any)[todo.id] ? 
@@ -66,13 +66,13 @@ function TodoList() {
                   <div className="flex gap-2 items-center">
                     {!todo.completed &&
                     (<button 
-                      className="bg-green-600 text-white py-1 px-4 rounded-[5rem] text-sm flex items-center" 
+                      className="bg-green-600 text-white py-1 px-2 rounded-[5rem] text-xs flex items-center" 
                       onClick={() => dispatch(completeTodo({ ...todo, completed: !todo.completed, id: todo.id }))}>
-                      Mark done
-                      <CheckCircle color="white" size={14} className="inline ml-2"/>
+                      Complete task
+                      <CheckCircle color="white" size={12} className="inline ml-2"/>
                     </button>)}
-                    <Edit color="#c9c9c9" size={22} onClick={() => toggleOpen(todo.id)} className="cursor-pointer"/>
-                    <Trash2 color="#b91c1b" size={22} className="cursor-pointer" onClick={() => dispatch(removeTodo(todo.id))} />
+                    <Edit color="#c9c9c9" size={20} onClick={() => toggleOpen(todo.id)} className="cursor-pointer"/>
+                    <Trash2 color="#b91c1b" size={20} className="cursor-pointer" onClick={() => dispatch(removeTodo(todo.id))} />
                   </div>
                 </div>
               ))
