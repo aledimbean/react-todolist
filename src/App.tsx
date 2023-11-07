@@ -11,7 +11,7 @@ const Container = styled.div`
   position: relative;
   width: 100%;
   height: 100vh;
-  padding: 10rem;
+  padding: 10rem 2rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   &:before {
     position: absolute;
