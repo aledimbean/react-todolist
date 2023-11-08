@@ -36,7 +36,7 @@ const TodoDetail = ({todo, toggleModal}: IProps) => {
       return () => {
         document.removeEventListener('click', (e) => handleOutsideClick(e));
       }
-    }, []);
+    }, [todo.id, toggleModal]);
     
     
     return ReactDOM.createPortal(
