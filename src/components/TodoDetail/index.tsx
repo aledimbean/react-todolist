@@ -41,7 +41,7 @@ const TodoDetail = ({todo, toggleModal}: IProps) => {
     
     return ReactDOM.createPortal(
         <div className="backdrop justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[8] outline-none focus:outline-none bg-black bg-opacity-40">
-          <div className="relative my-6 mx-auto w-full md:w-auto md:min-w-[20rem] bg-white border-0 rounded-lg shadow-lg">
+          <div className="relative my-6 mx-4 md:mx-auto w-full md:w-auto md:min-w-[20rem] bg-white border-0 rounded-lg shadow-lg">
             <div className="flex gap-2 items-centerw-full text-mainColor text-md border-b p-4">
               <Edit2 size={22} color="#9d164d"/><h2>Edit item</h2>
             </div>
