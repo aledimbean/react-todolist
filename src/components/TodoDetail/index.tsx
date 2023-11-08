@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import React, { useState, useEffect } from 'react'
 import { AppDispatch } from "../../redux/store";
-import { updateTodoTitle } from "../../redux/todoSlice";
+import { updateTodo } from "../../redux/todoSlice";
 import { Save, Edit2 } from 'react-feather';
 import { Todo } from "../../models/Todo";
 import ReactDOM from "react-dom";
@@ -22,7 +22,7 @@ const TodoDetail = ({todo, toggleModal}: IProps) => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      dispatch(updateTodoTitle(formData));
+      dispatch(updateTodo(formData));
       toggleModal(todo.id);
     }
 
@@ -51,7 +51,7 @@ const TodoDetail = ({todo, toggleModal}: IProps) => {
                 <input 
                 name="title"
                 type="text"
-                className="outline-none text-gray-900 border border-gray-300 rounded-md focus:border-none focus:bg-white focus:ring-1 focus:ring-mainColor bg-gray-50 px-2 py-1" 
+                className="text-xs outline-none text-gray-900 border border-gray-300 rounded-md focus:border-none focus:bg-white focus:ring-1 focus:ring-mainColor bg-gray-50 px-2 py-1" 
                 defaultValue={todo.title} 
                 onChange={handleInputChange} />
               </label>
@@ -61,12 +61,12 @@ const TodoDetail = ({todo, toggleModal}: IProps) => {
                 name="description"
                 rows={5}
                 cols={1}
-                className="outline-none text-gray-900 border border-gray-300 rounded-md focus:border-none focus:bg-white focus:ring-1 focus:ring-mainColor bg-gray-50 px-2 py-1" 
+                className="text-xs outline-none text-gray-900 border border-gray-300 rounded-md focus:border-none focus:bg-white focus:ring-1 focus:ring-mainColor bg-gray-50 px-2 py-1" 
                 defaultValue={todo.description} 
                 onChange={handleInputChange}/>
               </label>
               <button type="submit" className="rounded-[5rem] bg-green-600 text-white py-2 mt-4">
-                Save <Save color="white" width={16} className="inline cursor-pointer ml-2" />
+                Save <Save color="white" width={16} className="inline cursor-pointer ml-1" />
               </button>
             </form>
           </div>

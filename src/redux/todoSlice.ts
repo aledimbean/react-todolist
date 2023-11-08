@@ -18,7 +18,7 @@ const todoSlice = createSlice({
         } as Todo
       })
     },
-    updateTodoTitle(
+    updateTodo(
       state,
       action: PayloadAction<Todo>
     ){
@@ -42,5 +42,5 @@ const todoSlice = createSlice({
   },
 });
 
-export const { addTodo, removeTodo, updateTodoTitle, completeTodo } = todoSlice.actions;
+export const { addTodo, removeTodo, updateTodo, completeTodo } = todoSlice.actions;
 export default todoSlice.reducer;

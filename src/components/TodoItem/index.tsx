@@ -22,14 +22,19 @@ const TodoItem = ({todo}: IProps) => {
     return (
       <div key={todo.id} className="flex py-2 justify-between text-mainColor border-b-2 last:border-b-0 text-xs md:text-sm">
       <div className={`flex flex-col ${(todo.completed && !(isOpen as any)[todo.id]) ? 'line-through' : ''}`}>
-        <h2 className={todo.completed ? 'opacity-40' : ''}><Target size={18} color="#b91c1b" className="inline mr-2" />{todo.title}</h2>
+        <h2 className={`text-lg ${todo.completed ? 'opacity-40' : ''}`}><Target size={18} color="#b91c1b" className="inline mr-2" />{todo.title}</h2>
         {(todo.description) ? 
-        <span className="text-xs mt-2 ml-7 text-black opacity-80">Details: {todo.description}</span>
+        <h3 className="text-xs mt-2 ml-7 text-black opacity-80">Details: {todo.description}</h3>
         : null}
       </div>
       <div className="flex flex-col md:flex-row gap-2 md:gap-3 items-end md:items-center text-xs">
         <Edit2 color="#c9c9c9" size={20} onClick={() => toggleOpen(todo.id)} className="cursor-pointer"/>
-        <Trash2 color="#b91c1b" size={20} className="cursor-pointer" onClick={() => dispatch(removeTodo(todo.id))} />
+        <button 
+        className="w-[8rem] justify-center border border-red-600 bg-red-600 text-white rounded-md p-1 flex items-center" 
+        onClick={() => dispatch(removeTodo(todo.id))}>
+          Delete
+        <Trash2 color="white" size={14} className="inline ml-1" />
+        </button>
         {!todo.completed ?
         (<button 
           className="w-[8rem] justify-center border border-green-600 text-white bg-green-600 rounded-md p-1 flex items-center" 
