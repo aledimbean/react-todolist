@@ -15,7 +15,7 @@ const NavBar = () => {
           <NavLink
             key={item.name}
             to={item.href}
-            className={(item:any) => (item.isActive && 'underline')}
+            className={(item:any) => (item.isActive ? 'underline' : '')}
           >
             {item.name}
           </NavLink>

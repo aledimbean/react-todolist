@@ -1,26 +1,16 @@
-import {useState } from 'react'
-import { Edit, Check, Trash2, Save, List, Target, RefreshCw } from 'react-feather';
+import { List } from 'react-feather';
 
 // Other Imports
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
-import { addTodo, removeTodo, completeTodo, updateTodoTitle } from "../../redux/todoSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
+import TodoForm from "../TodoForm";
+import TodoItem from "../TodoItem";
 
 
 function TodoList() {
-  //React Hooks
-  const [todoTitle, setTodoTitle] = useState('');
 
   //React Redux Hooks
   const todoList = useSelector((state: RootState) => state);
-  const [isOpen, setIsOpen] = useState({});
-  const toggleOpen = (id:string) => {
-    setIsOpen({
-      ...isOpen,
-      [id]: !(isOpen as any)[id],
-    });
-  };
-  const dispatch = useDispatch<AppDispatch>();
 
   return (
     <div className="flex justify-center">
@@ -29,63 +19,16 @@ function TodoList() {
           <h1><List size={18} color="white" className="inline mr-2"/>Agenda</h1>
           <span className="text-xs">Completed items: {todoList.filter((todo) => todo.completed).length}</span>
         </div>
-        <div className="flex w-full md:w-1/2 justify-between md:justify-start gap-1 md:gap-2 pt-6 pb-10 px-4">
-          <input 
-            className="flex basis-1/2 px-4 py-2 outline-none text-gray-900 border border-gray-300 rounded-[5rem] bg-gray-50 text-md focus:ring-mainColor focus:border-mainColor" 
-            type="text" 
-            onChange={(e:any) => setTodoTitle(e.target.value)} 
-            value={todoTitle} />
-          <button 
-            className="bg-mainColor text-white py-2 px-4 rounded-[5rem] text-sm" 
-            onClick={() => {
-            if (todoTitle !== '') {
-              dispatch(addTodo(todoTitle))
-              setTodoTitle('')
-          }}}>Add task</button>
-          </div>
-          {todoList.length > 0 && 
+          <TodoForm text="Add task" />
+          {todoList.length > 0 ?
           <ul className="p-4">
             {
               todoList.map((todo) => (
-                <div key={todo.id} className="flex items-center py-2 justify-between text-mainColor border-b-2 last:border-b-0 text-xs md:text-sm">
-                  <div className={`flex gap-2 items-center ${todo?.completed && !(isOpen as any)[todo.id] ? 'line-through' : ''}`}>
-                    {/* Toggle edit mode */}
-                    {(isOpen as any)[todo.id] ? 
-                    <>
-                      <input 
-                      type="text"
-                      className="outline-none text-gray-900 border border-gray-300 rounded-[5rem] focus:border-none focus:bg-white focus:ring-1 focus:ring-mainColor bg-gray-50 px-2 py-1" 
-                      defaultValue={todo.title} 
-                      onChange={(e) => dispatch(updateTodoTitle({ ...todo, title: e.target.value, id: todo.id }))} />
-                      <Save color="#15a34a" width={20} onClick={() => toggleOpen(todo.id)} className="cursor-pointer" />
-                    </> : 
-                    <>
-                    <h2 className={todo?.completed ? 'opacity-40' : ''}><Target size={18} color="#b91c1b" className="inline mr-2" />{todo.title}</h2>
-                    </>}
-                  </div>
-                  <div className="flex gap-2 md:gap-3 items-center text-xs">
-                    <Edit color="#c9c9c9" size={20} onClick={() => toggleOpen(todo.id)} className="cursor-pointer"/>
-                    <Trash2 color="#b91c1b" size={20} className="cursor-pointer" onClick={() => dispatch(removeTodo(todo.id))} />
-                    {!todo.completed ?
-                    (<button 
-                      className="w-[8rem] justify-center border border-green-600 text-white bg-green-600 rounded-md p-1 flex items-center" 
-                      onClick={() => dispatch(completeTodo({ ...todo, completed: !todo.completed, id: todo.id }))}>
-                        Mark as done
-                      <Check color="white" size={14}  strokeWidth={2} className="inline ml-1"/>
-                    </button>) :
-                    (<button 
-                    className="w-[8rem] justify-center border border-[#c9c9c9] text-[#c9c9c9] rounded-md p-1 flex items-center" 
-                    onClick={() => dispatch(completeTodo({ ...todo, completed: !todo.completed, id: todo.id }))}>
-                      Redo
-                    <RefreshCw color="#c9c9c9" size={12}  strokeWidth={2} className="inline ml-1"/>
-                    </button>)
-                    }
-                  </div>
-                </div>
+                <TodoItem todo={todo} key={todo.id} />
               ))
             }
           </ul>
-        }
+         : null}
       </div>
     </div>
   )

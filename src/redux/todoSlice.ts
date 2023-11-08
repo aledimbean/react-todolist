@@ -25,8 +25,8 @@ const todoSlice = createSlice({
       // Find todo item by id
       const index = state.findIndex((todo) => todo.id === action.payload.id);
       const updatedState = [...state];
-      console.log(index, updatedState);
       updatedState[index].title = action.payload.title;
+      updatedState[index].description = action.payload.description;
     },
     completeTodo(
       state,
