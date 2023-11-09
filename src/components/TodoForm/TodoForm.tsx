@@ -16,6 +16,7 @@ const TodoForm = (props: ButtonText) => {
     const handleKeyDown = (e: any) => {
       if (e.key === 'Enter') {
         dispatch(addTodo(todoTitle));
+        setTodoTitle('');
       }
     }
     return (
