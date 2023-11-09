@@ -2,8 +2,6 @@ import Navbar from './components/Navbar/NavBar';
 import RandomQuote from './components/RandomQuote/RandomQuote';
 import TodoList from './components/TodoList/TodoList';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Theme } from './Theme';
-import { ThemeProvider } from "styled-components";
 import styled from "styled-components";
 import img from "./assets/dotted-background.jpg"
 
@@ -30,7 +28,6 @@ const Container = styled.div`
 const App = () => {
   return (
     <BrowserRouter>
-      <ThemeProvider theme={Theme}>
           <Navbar />
         <Container>
           <Routes>
@@ -38,7 +35,6 @@ const App = () => {
             <Route path="/random-quote" element={<RandomQuote />} />
           </Routes>
         </Container>
-      </ThemeProvider>
 	  </BrowserRouter>
   );
 }
