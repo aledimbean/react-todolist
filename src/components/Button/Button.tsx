@@ -1,7 +1,6 @@
 /*
  Usage 
  <Button classes="class" text="Add" buttonStyle="primary">
-    {text} --- BUTTON TEXT
     <Icon size={20}/> --- CHILDREN PROP
  </Button>
  */
