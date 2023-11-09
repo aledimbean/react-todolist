@@ -1,6 +1,6 @@
-import Navbar from './components/Navbar';
-import RandomQuote from './components/RandomQuote';
-import TodoList from './components/TodoList';
+import Navbar from './components/Navbar/NavBar';
+import RandomQuote from './components/RandomQuote/RandomQuote';
+import TodoList from './components/TodoList/TodoList';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Theme } from './Theme';
 import { ThemeProvider } from "styled-components";

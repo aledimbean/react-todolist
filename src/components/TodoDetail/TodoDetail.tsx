@@ -5,6 +5,7 @@ import { updateTodo } from "../../redux/todoSlice";
 import { Save, Edit2 } from 'react-feather';
 import { Todo } from "../../models/Todo";
 import ReactDOM from "react-dom";
+import Button from "../Button/Button";
 
 interface IProps {
     todo: Todo,
@@ -20,8 +21,7 @@ const TodoDetail = ({todo, toggleModal}: IProps) => {
       setFormData({ ...formData, [name]: value });
     } 
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+    const handleSubmit = () => {
       dispatch(updateTodo(formData));
       toggleModal(todo.id);
     }
@@ -45,7 +45,7 @@ const TodoDetail = ({todo, toggleModal}: IProps) => {
             <div className="flex gap-2 items-centerw-full text-mainColor text-md border-b p-4">
               <Edit2 size={22} color="#9d164d"/><h2>Edit item</h2>
             </div>
-            <form onSubmit={handleSubmit} className="p-4 flex flex-col gap-3">
+            <div className="p-4 flex flex-col gap-3">
               <label className="flex justify-between items-center font-mono">
                 Title
                 <input 
@@ -65,10 +65,10 @@ const TodoDetail = ({todo, toggleModal}: IProps) => {
                 defaultValue={todo.description} 
                 onChange={handleInputChange}/>
               </label>
-              <button type="submit" className="rounded-[5rem] bg-green-600 text-white py-2 mt-4">
-                Save <Save color="white" width={16} className="inline cursor-pointer ml-1" />
-              </button>
-            </form>
+              <Button classes="mt-4" text="Save item" buttonStyle="primary" onClick={handleSubmit}>
+                <Save color="white" width={16} className="inline ml-1" />
+              </Button>
+            </div>
           </div>
         </div>, document.getElementById('root') as Element
     )

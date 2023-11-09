@@ -3,14 +3,14 @@ import { List } from 'react-feather';
 // Other Imports
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
-import TodoForm from "../TodoForm";
-import TodoItem from "../TodoItem";
+import TodoForm from "../TodoForm/TodoForm";
+import TodoItem from "../TodoItem/TodoItem";
 
 
-function TodoList() {
+export default function TodoList() {
 
   //React Redux Hooks
-  const todoList = useSelector((state: RootState) => state);
+  const todoList = useSelector((state: RootState) => state.todos);
 
   return (
     <div className="flex justify-center">
@@ -33,5 +33,3 @@ function TodoList() {
     </div>
   )
 }
-
-export default TodoList

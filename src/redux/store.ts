@@ -1,8 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import todosReducer from "./todoSlice";
+import quotesReducer from "./quotesSlice";
 
 export const store = configureStore({
-  reducer: todosReducer,
+  reducer: {
+    todos: todosReducer,
+    quotes: quotesReducer
+  },
   preloadedState: loadFromLocalStorage()
 });
 

@@ -3,19 +3,20 @@ import { AppDispatch } from "../../redux/store";
 import { useState } from 'react'
 import { removeTodo, completeTodo } from "../../redux/todoSlice";
 import { Edit2, Target, Check, Trash2, RefreshCw } from 'react-feather';
-import TodoDetail from "../TodoDetail";
+import TodoDetail from "../TodoDetail/TodoDetail";
 import { Todo } from "../../models/Todo";
+import Button from "../Button/Button";
 
 interface IProps {
     todo: Todo
 }
 
 const TodoItem = ({todo}: IProps) => {
-    const [isOpen, setIsOpen] = useState({});
-    const toggleOpen = (id:string) => {
+    const [isOpen, setIsOpen] = useState<object|any>({});
+    const toggleOpen = (id: string) => {
       setIsOpen({
         ...isOpen,
-        [id]: !(isOpen as any)[id],
+        [id]: !(isOpen)[id],
       });
     };
     const dispatch = useDispatch<AppDispatch>();
@@ -29,28 +30,19 @@ const TodoItem = ({todo}: IProps) => {
       </div>
       <div className="flex flex-col md:flex-row gap-2 md:gap-3 items-end md:items-center text-xs">
         <Edit2 color="#c9c9c9" size={20} onClick={() => toggleOpen(todo.id)} className="cursor-pointer"/>
-        <button 
-        className="w-[8rem] justify-center border border-red-600 bg-red-600 text-white rounded-md p-1 flex items-center" 
-        onClick={() => dispatch(removeTodo(todo.id))}>
-          Delete
-        <Trash2 color="white" size={14} className="inline ml-1" />
-        </button>
+        <Button classes="flex w-[8rem] justify-center items-center" text="Delete" buttonStyle="error" onClick={() => dispatch(removeTodo(todo.id))}>
+          <Trash2 color="white" size={14} className="inline ml-1" />
+         </Button>
         {!todo.completed ?
-        (<button 
-          className="w-[8rem] justify-center border border-green-600 text-white bg-green-600 rounded-md p-1 flex items-center" 
-          onClick={() => dispatch(completeTodo({ ...todo, completed: !todo.completed}))}>
-            Mark as done
+        (<Button classes="flex justify-center items-center w-[8rem] justify-center" text="Mark as done" buttonStyle="success" onClick={() => dispatch(completeTodo({ ...todo, completed: !todo.completed}))}>
           <Check color="white" size={14} className="inline ml-1"/>
-        </button>) :
-        (<button 
-        className="w-[8rem] justify-center border border-[#c9c9c9] text-[#c9c9c9] rounded-md p-1 flex items-center" 
-        onClick={() => dispatch(completeTodo({ ...todo, completed: !todo.completed}))}>
-          Redo
-        <RefreshCw color="#c9c9c9" size={12} className="inline ml-1"/>
-        </button>)
+         </Button>) :
+        (<Button classes="flex justify-center items-center w-[8rem] justify-center" text="Redo" buttonStyle="secondary" onClick={() => dispatch(completeTodo({ ...todo, completed: !todo.completed}))}>
+           <RefreshCw color="white" size={12} className="inline ml-1"/>
+        </Button>)
         }
       </div>
-      {(isOpen as any)[todo.id] ?
+      {(isOpen)[todo.id] ?
         <TodoDetail todo={todo} toggleModal={toggleOpen} />
       : null}
     </div>
